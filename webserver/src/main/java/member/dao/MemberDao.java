@@ -17,15 +17,24 @@ public class MemberDao {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from member where memberid = ?");
+					"select * from member where id = ?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			Member member = null;
 			if (rs.next()) {
 				member = new Member(
-						rs.getString("memberid"), 
-						rs.getString("name"), 
-						rs.getString("password"),
+						rs.getString("id"), 
+						rs.getString("password"), 
+						rs.getString("name"),
+						rs.getString("juminfirst"),
+						rs.getString("juminsecond"),
+						rs.getString("phone1"),
+						rs.getString("phone2"),
+						rs.getString("phone3"),
+						rs.getString("adress"),
+						rs.getString("email"),
+						rs.getInt("point"),
+						rs.getInt("내계좌"),
 						toDate(rs.getTimestamp("regdate")));
 			}
 			return member;
